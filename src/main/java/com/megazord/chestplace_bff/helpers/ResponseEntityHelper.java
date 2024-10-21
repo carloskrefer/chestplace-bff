@@ -5,17 +5,10 @@ import org.springframework.web.client.RestClientResponseException;
 
 public class ResponseEntityHelper {
     
-    public static ResponseEntity<String> duplicateExceptionResponse(RestClientResponseException e) {
+    public static ResponseEntity<String> getResponseEntityByException(RestClientResponseException e) {
         return ResponseEntity
             .status(e.getStatusCode())
             .body(e.getResponseBodyAsString());
-    }
-
-    public static ResponseEntity<String> duplicateSuccessResponse(ResponseEntity<String> response) {
-        return ResponseEntity
-            .status(response.getStatusCode())
-            .headers(response.getHeaders())
-            .body(response.getBody());
     }
 
 }

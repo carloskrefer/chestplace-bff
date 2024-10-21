@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
+import com.megazord.chestplace_bff.helpers.ResponseEntityHelper;
+
 @RestController
 @RequestMapping("/api/carrinhos")
 public class CarrinhoController {
@@ -29,18 +31,13 @@ public class CarrinhoController {
 
     @GetMapping("/{compradorId}")
     public ResponseEntity<String> getCarrinho(@PathVariable int compradorId) {
-        String getUrl = URL + compradorId;
-
         try {
-            ResponseEntity<String> response = restTemplate.getForEntity(getUrl, String.class);
-            return ResponseEntity
-                .status(response.getStatusCode())
-                .headers(response.getHeaders())
-                .body(response.getBody());
+            return restTemplate.getForEntity(
+                URL + compradorId, 
+                String.class
+            );
         } catch(RestClientResponseException e) {
-            return ResponseEntity
-                .status(e.getStatusCode())
-                .body(e.getResponseBodyAsString());
+            return ResponseEntityHelper.getResponseEntityByException(e);
         }
     }
 
@@ -49,15 +46,13 @@ public class CarrinhoController {
         @RequestBody Map<String, Object> carrinho
     ) {
         try {
-            ResponseEntity<String> response = restTemplate.postForEntity(URL, carrinho, String.class);
-            return ResponseEntity
-                .status(response.getStatusCode())
-                .headers(response.getHeaders())
-                .body(response.getBody());
+            return restTemplate.postForEntity(
+                URL, 
+                carrinho, 
+                String.class
+            );
         } catch(RestClientResponseException e) {
-            return ResponseEntity
-                .status(e.getStatusCode())
-                .body(e.getResponseBodyAsString());
+            return ResponseEntityHelper.getResponseEntityByException(e);
         }
     } 
 
@@ -66,46 +61,29 @@ public class CarrinhoController {
         @PathVariable int compradorId,
         @RequestBody Map<String, Object> carrinho
     ) {
-        String putUrl = URL + compradorId;
-        HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(carrinho);
-
         try {
-            ResponseEntity<String> response = restTemplate.exchange(
-                putUrl, 
+            return restTemplate.exchange(
+                URL + compradorId, 
                 HttpMethod.PUT, 
-                requestEntity, 
+                new HttpEntity<>(carrinho), 
                 String.class
             );
-            return ResponseEntity
-                .status(response.getStatusCode())
-                .headers(response.getHeaders())
-                .body(response.getBody());
         } catch(RestClientResponseException e) {
-            return ResponseEntity
-                .status(e.getStatusCode())
-                .body(e.getResponseBodyAsString());
+            return ResponseEntityHelper.getResponseEntityByException(e);
         }
     }
 
     @DeleteMapping("/{compradorId}")
     public ResponseEntity<String> deleteCarrinho(@PathVariable int compradorId) {
-        String deleteUrl = URL + compradorId;
-
         try {
-            ResponseEntity<String> response = restTemplate.exchange(
-                deleteUrl, 
+            return restTemplate.exchange(
+                URL + compradorId, 
                 HttpMethod.DELETE, 
                 null, 
                 String.class
             );
-            return ResponseEntity
-                .status(response.getStatusCode())
-                .headers(response.getHeaders())
-                .body(response.getBody());
         } catch(RestClientResponseException e) {
-            return ResponseEntity
-                .status(e.getStatusCode())
-                .body(e.getResponseBodyAsString());
+            return ResponseEntityHelper.getResponseEntityByException(e);
         }
     }
 
