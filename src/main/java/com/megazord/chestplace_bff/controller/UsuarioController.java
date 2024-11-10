@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,10 +33,14 @@ public class UsuarioController {
     @GetMapping()
     public ResponseEntity<String> getAllUsers() {
         try {
-            return restTemplate.getForEntity(
+            ResponseEntity<String> responseEntity = restTemplate.getForEntity(
                 URL, 
                 String.class
             );
+
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(responseEntity.getBody());
         } catch(RestClientResponseException e) {
             return ResponseEntityHelper.getResponseEntityByException(e);
         } catch (Exception e) {
@@ -46,10 +51,15 @@ public class UsuarioController {
     @GetMapping("/{id}")
     public ResponseEntity<String> getCarrinho(@PathVariable int id) {
         try {
-            return restTemplate.getForEntity(
+            ResponseEntity<String> responseEntity = restTemplate.getForEntity(
                 URL + "/" + id, 
                 String.class
             );
+
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(responseEntity.getBody());
+                    
         } catch(RestClientResponseException e) {
             return ResponseEntityHelper.getResponseEntityByException(e);
         } catch (Exception e) {
