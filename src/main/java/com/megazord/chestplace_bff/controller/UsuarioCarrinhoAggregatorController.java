@@ -1,5 +1,6 @@
 package com.megazord.chestplace_bff.controller;
 
+import org.json.JSONObject;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -36,15 +37,15 @@ public class UsuarioCarrinhoAggregatorController {
                 String.class
             );
 
-            String jsonResponse = String.format(
-                "{\"carrinho\": %s, \"usuario\": %s}", 
-                carrinhoResponse.getBody(), 
-                usuarioResponse.getBody()
-            );
+            JSONObject usuarioJson = new JSONObject(usuarioResponse.getBody());
+            JSONObject carrinhoJson = new JSONObject(carrinhoResponse.getBody());
+            carrinhoJson.remove("compradorId");
+            carrinhoJson.remove("_id");
+            usuarioJson.put("carrinho", carrinhoJson);
 
             return ResponseEntity.ok()
                     .contentType(MediaType.APPLICATION_JSON)
-                    .body(jsonResponse);
+                    .body(usuarioJson.toString());
 
         } catch (RestClientResponseException e) {
             return ResponseEntityHelper.getResponseEntityByException(e);
