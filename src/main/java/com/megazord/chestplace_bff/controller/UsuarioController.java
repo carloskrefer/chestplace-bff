@@ -38,6 +38,8 @@ public class UsuarioController {
             );
         } catch(RestClientResponseException e) {
             return ResponseEntityHelper.getResponseEntityByException(e);
+        } catch (Exception e) {
+            return ResponseEntityHelper.getGenericServerErrorResponse(e);
         }
     }
 
@@ -50,6 +52,8 @@ public class UsuarioController {
             );
         } catch(RestClientResponseException e) {
             return ResponseEntityHelper.getResponseEntityByException(e);
+        } catch (Exception e) {
+            return ResponseEntityHelper.getGenericServerErrorResponse(e);
         }
     }
 
@@ -65,6 +69,8 @@ public class UsuarioController {
             );
         } catch(RestClientResponseException e) {
             return ResponseEntityHelper.getResponseEntityByException(e);
+        } catch (Exception e) {
+            return ResponseEntityHelper.getGenericServerErrorResponse(e);
         }
     } 
 
@@ -82,6 +88,8 @@ public class UsuarioController {
             );
         } catch(RestClientResponseException e) {
             return ResponseEntityHelper.getResponseEntityByException(e);
+        } catch (Exception e) {
+            return ResponseEntityHelper.getGenericServerErrorResponse(e);
         }
     }
 
@@ -96,6 +104,8 @@ public class UsuarioController {
             );
         } catch(RestClientResponseException e) {
             return ResponseEntityHelper.getResponseEntityByException(e);
+        } catch (Exception e) {
+            return ResponseEntityHelper.getGenericServerErrorResponse(e);
         }
     }
 

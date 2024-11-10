@@ -38,6 +38,8 @@ public class CarrinhoController {
             );
         } catch(RestClientResponseException e) {
             return ResponseEntityHelper.getResponseEntityByException(e);
+        } catch (Exception e) {
+            return ResponseEntityHelper.getGenericServerErrorResponse(e);
         }
     }
 
@@ -53,6 +55,8 @@ public class CarrinhoController {
             );
         } catch(RestClientResponseException e) {
             return ResponseEntityHelper.getResponseEntityByException(e);
+        } catch (Exception e) {
+            return ResponseEntityHelper.getGenericServerErrorResponse(e);
         }
     } 
 
@@ -70,6 +74,8 @@ public class CarrinhoController {
             );
         } catch(RestClientResponseException e) {
             return ResponseEntityHelper.getResponseEntityByException(e);
+        } catch (Exception e) {
+            return ResponseEntityHelper.getGenericServerErrorResponse(e);
         }
     }
 
@@ -84,6 +90,8 @@ public class CarrinhoController {
             );
         } catch(RestClientResponseException e) {
             return ResponseEntityHelper.getResponseEntityByException(e);
+        } catch (Exception e) {
+            return ResponseEntityHelper.getGenericServerErrorResponse(e);
         }
     }
 

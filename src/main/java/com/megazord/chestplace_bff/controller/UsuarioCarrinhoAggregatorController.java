@@ -48,6 +48,8 @@ public class UsuarioCarrinhoAggregatorController {
 
         } catch (RestClientResponseException e) {
             return ResponseEntityHelper.getResponseEntityByException(e);
+        } catch (Exception e) {
+            return ResponseEntityHelper.getGenericServerErrorResponse(e);
         }
     }
 
