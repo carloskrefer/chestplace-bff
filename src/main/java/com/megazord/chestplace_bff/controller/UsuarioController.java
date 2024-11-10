@@ -20,7 +20,7 @@ import org.springframework.web.client.RestTemplate;
 import com.megazord.chestplace_bff.helpers.ResponseEntityHelper;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UsuarioController {
     private String URL = "https://chestplace-egceafa0bge8d9bz.brazilsouth-01.azurewebsites.net/users";
     private RestTemplate restTemplate;
